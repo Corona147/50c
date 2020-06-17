@@ -464,20 +464,6 @@ void insere(int v[], int N, int x)
     v[i] = x;
 }
 //-------------------------------------ex 27 ----------------------------------------------------------
-void insere(int v[], int N, int x)
-{
-    int i;
-    for (i = 0; v[i] <= x; i++)
-        ;
-    int j = N + 1;
-    while (j > i)
-    {
-        v[j] = v[j - 1];
-        j--;
-    }
-    v[i] = x;
-}
-//-------------------------------------ex 28 ----------------------------------------------------------
 void merge(int r[], int a[], int b[], int na, int nb)
 {
     int i = 0;
@@ -518,7 +504,7 @@ void merge(int r[], int a[], int b[], int na, int nb)
         }
     }
 }
-//-------------------------------------ex 29 ----------------------------------------------------------
+//-------------------------------------ex 28 ----------------------------------------------------------
 int crescente(int a[], int i, int j)
 {
     int r = 1 for (i; (i < j) && r == 1; i++)
@@ -528,7 +514,7 @@ int crescente(int a[], int i, int j)
     }
     return r;
 }
-//-------------------------------------ex 30 ----------------------------------------------------------
+//-------------------------------------ex 29 ----------------------------------------------------------
 int retiraNeg(int v[], int N)
 {
     int ret = 0, i;
@@ -550,4 +536,419 @@ int retiraNeg(int v[], int N)
             ret++;
     }
     return ret;
+}
+//-------------------------------------ex 30 ----------------------------------------------------------
+int menosFreq(int v[], int N)
+{
+    int i = 0;
+    int cont = 1;
+    int fin = 100;
+    int ret = v[0];
+    while (i < N)
+    {
+        if (v[i] == v[i + 1])
+        {
+            cont++;
+            i++;
+        }
+        else if (cont < fin)
+        {
+            fin = cont;
+            ret = v[i];
+            cont = 1;
+            i++;
+        }
+        else
+        {
+            cont = 1;
+            i++;
+        }
+    }
+    return ret;
+}
+//-------------------------------------ex 31 ----------------------------------------------------------
+int maisFreq(int v[], int N)
+{
+    int i = 0;
+    int cont = 1;
+    int fin = 0;
+    int ret = v[0];
+    while (i < N)
+    {
+        if (v[i] == v[i + 1])
+        {
+            cont++;
+            i++;
+        }
+        else if (cont > fin)
+        {
+            fin = cont;
+            ret = v[i];
+            cont = 1;
+            i++;
+        }
+        else
+        {
+            cont = 1;
+            i++;
+        }
+    }
+    return ret;
+}
+//-------------------------------------ex 32 ----------------------------------------------------------
+int maxCresc(int v[], int N)
+{
+    int i;
+    int conta = 1;
+    int tamanho = 0;
+    for (i = 0; i < N; i++)
+    {
+        if (v[i] <= v[i + 1])
+        {
+            conta++;
+        }
+        else if (conta > tamanho)
+        {
+            tamanho = conta;
+            conta = 1;
+        }
+        else
+            conta = 1;
+    }
+    return tamanho;
+}
+//-------------------------------------ex 33 ----------------------------------------------------------
+int elimRep(int v[], int n)
+{
+    int i, j;
+    int z;
+    for (i = 0; i < n; i++)
+    {
+        for (j = i + 1; j < n; j++)
+            if (v[i] == v[j])
+            {
+                z = j;
+                while (z < n)
+                {
+                    v[z] = v[z + 1];
+                    z++;
+                }
+                n--;
+                j--;
+            }
+    }
+    return n;
+}
+//-------------------------------------ex 34 ----------------------------------------------------------
+int elimRepOrd(int v[], int n)
+{
+    int i = 0;
+    int z;
+    while (i < n && n != 1)
+    {
+        if (v[i] == v[i + 1])
+        {
+            z = i;
+            while (z < n)
+            {
+                v[z] = v[z + 1];
+                z++;
+            }
+            n--;
+        }
+        else
+            i++;
+    }
+    return n;
+}
+//-------------------------------------ex 35 ----------------------------------------------------------
+//imcopleta
+int comunsOrd(int a[], int na, int b[], int nb)
+{
+    // Função escaxe, os stores sao uns burros
+}
+//-------------------------------------ex 36 ----------------------------------------------------------
+int comuns(int a[], int na, int b[], int nb)
+{
+    int i, j;
+    int comum = 0;
+    int con = 1;
+    for (i = 0; i < na; i++)
+    {
+        for (j = 0; j < nb && con == 1; j++)
+        {
+            if (a[i] == b[j])
+            {
+                comum++;
+                con = 0;
+            }
+        }
+        con = 1;
+    }
+    return comum;
+}
+}
+//-------------------------------------ex 37 ----------------------------------------------------------
+int minInd(int v[], int n)
+{
+    int conta = v[0];
+    int ret = 0;
+    int i = 1;
+    while (i < n)
+    {
+        if (v[i] < conta)
+        {
+            conta = v[i];
+            ret = i;
+        }
+        i++;
+    }
+    return ret;
+}
+//-------------------------------------ex 38 ----------------------------------------------------------
+void somasAc(int v[], int Ac[], int N)
+{
+    int i = 0;
+    int acum = 0;
+    while (i < N)
+    {
+        acum += v[i];
+        Ac[i] = acum;
+        i++;
+    }
+}
+//-------------------------------------ex 39 ----------------------------------------------------------
+int triSup(int N, float m[N][N])
+{
+    int i;
+    int z;
+    int r = 1;
+    for (i = 0; i < N && r == 1; i++)
+    {
+        for (z = i; z >= 0 && r == 1; z--)
+        {
+            if (z < i && (m[i][z] != 0))
+                r = 0;
+        }
+    }
+    return r;
+}
+/*  A condição é sempre que o z for menor que o i.
+1 1 1 1   1 1 1  1 1
+0 1 1 1   0 1 1  0 1
+0 0 1 1   0 0 1
+0 0 0 1    
+*/
+//-------------------------------------ex 40 ----------------------------------------------------------
+void transposta(int N, float m[N][N])
+{
+    int i, z, a;
+    for (i = 0; i < N; i++)
+    {
+        for (z = i; z < N; z++)
+        {
+            a = m[i][z];
+            m[i][z] = m[z][i];
+            m[z][i] = a;
+        }
+    }
+}
+//-------------------------------------ex 41 ----------------------------------------------------------
+void addTo(int N, int M, int a[N][M], int b[N][M])
+{
+    int i, z;
+    for (i = 0; i < N; i++)
+    {
+        for (z = 0; z < M; z++)
+            a[i][z] += b[i][z];
+    }
+}
+//-------------------------------------ex 42 ----------------------------------------------------------
+int unionSet(int N, int v1[N], int v2[N], int r[N])
+{
+    int i = 0;
+    int comum = 0;
+    while (i < N)
+    {
+        if (v1[i] == 0 && v2[i] == 0)
+        {
+            r[i] = 0;
+        }
+        else
+            r[i] = 1;
+        i++;
+    }
+    return i;
+}
+//-------------------------------------ex 43 ----------------------------------------------------------
+int intersectSet(int N, int v1[N], int v2[N], int r[N])
+{
+    int i = 0;
+    int comum = 0;
+    while (i < N)
+    {
+        if (v1[i] == 1 && v2[i] == 1)
+        {
+            r[i] = 1;
+        }
+        else
+            r[i] = 0;
+        i++;
+    }
+    return i;
+}
+//-------------------------------------ex 44 ----------------------------------------------------------
+int intersectMSet(int N, int v1[N], int v2[N], int r[N]) // Função de piça, jbb podes ir para o caralho
+{
+    int i;
+    for (i = 0; i < N; i++)
+        r[i] = v1[i] < v2[i] ? v1[i] : v2[i];
+    return 0;
+}
+//-------------------------------------ex 45 ----------------------------------------------------------
+int unionMSet(int N, int v1[N], int v2[N], int r[N]) // Outra função de merda, Jbb já sabes.
+
+    //-------------------------------------ex 46 ----------------------------------------------------------
+    int cardinalMSet(int N, int v[N])
+{
+    int i = 0;
+    int conta = 0;
+    while (i < N)
+    {
+        conta += v[i];
+        i++;
+    }
+    return conta;
+}
+//-------------------------------------ex 47 ----------------------------------------------------------
+typedef enum movimento
+{
+    Norte,
+    Oeste,
+    Sul,
+    Este
+} Movimento;
+
+typedef struct posicao
+{
+    int x, y;
+} Posicao;
+
+Posicao posFinal(Posicao inicial, Movimento mov[], int N)
+{
+    int i = 0;
+    while (i < N)
+    {
+        if (mov[i] == Norte)
+        {
+            inicial.y++;
+            i++;
+        }
+        else if (mov[i] == Sul)
+        {
+            inicial.y--;
+            i++;
+        }
+        else if (mov[i] == Este)
+        {
+            inicial.x++;
+            i++;
+        }
+        else if (mov[i] == Oeste)
+        {
+            inicial.x--;
+            i++;
+        }
+    }
+    return inicial;
+}
+//-------------------------------------ex 48 ----------------------------------------------------------
+int caminho(Posicao inicial, Posicao final, Movimento mov[], int N)
+{
+
+    int horiz = (final.x) - (inicial.x);
+    int vertical = (final.y) - (inicial.y);
+    int i = 0;
+    if ((abs(horiz) + abs(vertical)) > 10)
+        return -1;
+    if (horiz < 0)
+    {
+        while (horiz != 0)
+        {
+            mov[i] = Oeste;
+            i++;
+            horiz++;
+        }
+    }
+    else if (horiz > 0)
+    {
+        while (horiz != 0)
+        {
+            mov[i] = Este;
+            i++;
+            horiz--;
+        }
+    }
+    if (vertical < 0)
+    {
+        while (vertical != 0)
+        {
+            mov[i] = Sul;
+            i++;
+            vertical++;
+        }
+    }
+    else if (vertical > 0)
+    {
+        while (vertical != 0)
+        {
+            mov[i] = Norte;
+            i++;
+            vertical--;
+        }
+    }
+    return i;
+}
+//-------------------------------------ex 49 ----------------------------------------------------------
+int maiscentral(Posicao pos[], int N)
+{
+    int i = 0;
+    float dist = 100;
+    float temp;
+    int ret;
+    Posicao t;
+
+    while (i < N)
+    {
+        t = pos[i];
+        temp = sqrt(((t.x) * (t.x)) + ((t.y) * (t.y)));
+        if (temp < dist)
+        {
+            dist = temp;
+            ret = i;
+            i++;
+        }
+        else
+            i++;
+    }
+    return ret;
+}
+//-------------------------------------ex 50 ----------------------------------------------------------
+int vizinhos(Posicao p, Posicao pos[], int N) // mais uma funcao de merda em que nao considera os vizinhos obliquos
+{
+    int viz = 0;
+    int i = 0;
+    int h, v;
+    while (i < N)
+    {
+        h = abs(p.x - ((pos[i]).x));
+        v = abs(p.y - ((pos[i]).y));
+        //if (v == 1 && h == 1);
+        if (v == 1 && h == 0)
+            viz++;
+        if (v == 0 && h == 1)
+            viz++;
+        i++;
+    }
+    return viz;
 }
